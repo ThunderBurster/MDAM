@@ -1,0 +1,1 @@
+python generate_data.py --filename=data/tsp100 --problem=tsp --graph_sizes=100 --dataset_size=10000 --seed=100
