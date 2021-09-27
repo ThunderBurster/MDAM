@@ -117,6 +117,10 @@ def train_epoch(model, optimizer, baseline, lr_scheduler, epoch, val_dataset, pr
         )
 
     avg_reward = validate(model, val_dataset, opts)
+    
+    # print into files
+    with open(os.path.join(opts.save_dir, 'record.txt'.format(epoch)), 'a') as f:
+        f.write('epoch {}, validating result: {}\n'.format(epoch, avg_reward.item()))
 
     if not opts.no_tensorboard:
         tb_logger.log_value('val_avg_reward', avg_reward, step)
