@@ -3,6 +3,7 @@
 import os
 import json
 import pprint as pp
+import time
 
 import torch
 import torch.optim as optim
@@ -131,7 +132,11 @@ def run(opts):
         opts.epoch_start = epoch_resume + 1
 
     if opts.eval_only:
+        start = time.perf_counter()
         validate(model, val_dataset, opts)
+        end = time.perf_counter()
+        print('eval toke total {} s'.format(end - start))
+
     else:
         for epoch in range(opts.epoch_start, opts.epoch_start + opts.n_epochs):
             train_epoch(
